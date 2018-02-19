@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}
+        <title>博客后台注册</title>
+    {% endblock %}
+{% block body %}
+<body data-type="login" class="theme-black">
+    <div class="am-g tpl-g">
+        <!-- 风格切换 -->
+        <div class="tpl-skiner">
+            <div class="tpl-skiner-toggle am-icon-cog">
+            </div>
+            <div class="tpl-skiner-content">
+                <div class="tpl-skiner-content-title">
+                    选择主题
+                </div>
+                <div class="tpl-skiner-content-bar">
+                    <span class="skiner-color skiner-white" data-color="theme-white"></span>
+                    <span class="skiner-color skiner-black" data-color="theme-black"></span>
+                </div>
+            </div>
+        </div>
+        <div class="tpl-login">
+            <div class="tpl-login-content">
+                <div class="tpl-login-title">注册用户</div>
+                <span class="tpl-login-content-info">
+                  创建一个新的用户
+              </span>
+
+
+                <form class="am-form tpl-form-line-form" method="POST">
+                        {{ form.hidden_tag() }}
+                    <div class="am-form-group">
+                        {{ form.email(placeholder='邮箱') }}
+                        {% for error in form.email.errors %}
+                         <span style="color: #fff;">{{error}}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="am-form-group">
+                        {{ form.username(placeholder='用户名') }}
+                        {% for error in form.username.errors %}
+                         <span style="color: #fff;">{{error}}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="am-form-group">
+                        {{ form.password(placeholder="请输入密码") }}
+                          {% for error in form.password.errors %}
+                           <span style="color: #fff;">{{error}}</span>
+                          {% endfor %}
+                    </div>
+
+                    <div class="am-form-group">
+                       {{ form.cfm_password(placeholder="再次输入密码") }}
+                    </div>
+
+                    <div class="am-form-group tpl-login-remember-me">
+                        <input id="remember-me" type="checkbox" checked>
+                        <label for="remember-me">
+
+                        我已阅读并同意 <a href="javascript:;">《用户注册协议》</a>
+                         </label>
+                    </div>
+                    <div class="am-form-group">
+                        {{ form.submit(class='am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn') }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

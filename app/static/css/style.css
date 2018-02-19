@@ -1,0 +1,84 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.c-center{
+    width: 1200px;
+    margin: 0 auto;
+    background: #dedede;
+}
+.article{
+    padding: 30px;
+}
+.art-title{
+    margin: 15px 0;
+}
+.tech-type{
+    margin-top: 15px;
+}
+.art-title label,.art-type label, .tech-type label{
+     font-size: 24px;
+     color: #333;
+     display: inline-block;
+     vertical-align: middle;
+     margin-right: 40px;
+}
+.art-title input{
+    min-width: 240px;
+    height: 40px;
+    font-size: 20px;
+    margin-left: 47px;
+}
+.art-type select{
+     min-width: 250px;
+    height: 40px;
+    font-size: 20px;
+}
+.tech-type input{
+    margin-left: 47px;
+}
+.art-content{
+    margin-top: 40px;
+}
+.art-content:after{
+    content: " ";
+    height: 0;
+    line-height:0;
+    display:block;
+    visibility:hidden;
+    clear:both
+}
+.art-markdown .flask-pagedown{
+    float: left;
+    width: 540px;
+    margin-right: 30px;
+}
+.art-markdown textarea{
+    width: 550px;
+    min-height: 800px;
+    border: none;
+}
+.flask-pagedown-preview{
+    float: left;
+    width: 550px;
+    min-height: 800px;
+    background: #fff;
+    word-break: break-all;
+
+}
+.art-sumbit{
+    text-align: center;
+    padding-bottom: 20px;
+    margin-top: 40px;
+}
+.art-sumbit input{
+    margin-left: -15px;
+    border: 1px solid #de240f;
+    background: #de240f;
+    color: #fff;
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 18px;
+
+}

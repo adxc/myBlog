@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>博客文章编辑</title>
+{% endblock %}
+{% block navbar %}
+    <header>
+        <!-- logo -->
+        <div class="am-fl tpl-header-logo">
+            <a href="javascript:;"><img src="../static/images/logoChen.png" alt=""></a>
+        </div>
+        <!-- 右侧内容 -->
+        <div class="tpl-header-fluid">
+            <!-- 其它功能-->
+            <div class="am-fr tpl-header-navbar">
+                <ul>
+                    <!-- 欢迎语 -->
+                    <li class="am-text-sm tpl-header-navbar-welcome">
+                        <a href="javascript:;">欢迎你, <span>Amaze UI</span> </a>
+                    </li>
+
+                    <!-- 退出 -->
+                    <li class="am-text-sm">
+                        <a href="javascript:;">
+                            <span class="am-icon-sign-out"></span> 退出
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+{% block slider %}
+{% endblock %}
+{% block content %}
+    <div class="c-center">
+
+        <form action="" method="post" class="article">
+            {{ form.hidden_tag() }}
+            <div class="art-title">
+                {{ form.title.label}}
+                {{ form.title(placeholder='文章标题') }}
+            </div>
+            <div class="art-type">
+                {{ form.articleType.label }}
+                {{ form.articleType}}
+            </div>
+            <div class="tech-type">
+                <label for="">标签</label>
+                {{ form.CssTag }}
+                {{ form.CssTag.label }}
+                {{ form.JsTag }}
+                {{ form.JsTag.label }}
+                {{ form.pythonTag }}
+                {{ form.pythonTag.label }}
+                {{ form.MachineTag }}
+                {{ form.MachineTag.label }}
+            </div>
+            <div class="art-content">
+                <div class="art-markdown">
+                    {{ form.article }}
+                </div>
+                <div class="art-line">
+                  {{ pagedown.include_pagedown() }}
+                </div>
+            </div>
+            <div class="art-sumbit">
+                {{ form.submit }}
+            </div>
+        </form>
+    </div>
+{% endblock %}
