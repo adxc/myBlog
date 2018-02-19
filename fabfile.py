@@ -9,7 +9,13 @@
   /_/   \_\_| |_|\__,_|\__, | /_/\_\_|\___|
                        |___/ 
 '''
-from fabric.api import local, lcd
-def hello():
+from fabric.api import local, lcd, cd, run
+from fabric.colors import *
+
+
+def local_upload(msg):
     with lcd('./'):
-        local('ls')
+        local('pip3 freeze>requirements.txt')
+        local('git add .')
+        local('git commit -m:'+msg)
+        local('git push')
