@@ -53,6 +53,7 @@ def server_start():
                 install_package('gunicorn')
         print(green('运行成功'))
 
+
 @task
 def deploy(msg):
     local_upload(msg)

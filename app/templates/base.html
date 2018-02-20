@@ -29,7 +29,7 @@
     <header>
             <!-- logo -->
             <div class="am-fl tpl-header-logo">
-                <a href="javascript:;"><img src="../static/images/logoChen.png" alt=""></a>
+                <a href="{{ url_for('admin.index') }}"><img src="../static/images/logoChen.png" alt=""></a>
             </div>
             <!-- 右侧内容 -->
             <div class="tpl-header-fluid">
@@ -51,17 +51,20 @@
                     <ul>
                         <!-- 欢迎语 -->
                         <li class="am-text-sm tpl-header-navbar-welcome">
-                            <a href="javascript:;">欢迎你, <span>Amaze UI</span> </a>
+                            <a href="javascript:;">欢迎你, <span>宇宙最帅的男人</span> </a>
                         </li>
 
                         <!-- 新邮件 -->
+                        <!--
                         <li class="am-dropdown tpl-dropdown" data-am-dropdown>
                             <a href="javascript:;" class="am-dropdown-toggle tpl-dropdown-toggle" data-am-dropdown-toggle>
                                 <i class="am-icon-envelope"></i>
                                 <span class="am-badge am-badge-success am-round item-feed-badge">4</span>
                             </a>
+                            -->
                             <!-- 弹出列表 -->
-                            <ul class="am-dropdown-content tpl-dropdown-content">
+                            <!--
+                             <ul class="am-dropdown-content tpl-dropdown-content">
                                 <li class="tpl-dropdown-menu-messages">
                                     <a href="javascript:;" class="tpl-dropdown-menu-messages-item am-cf">
                                         <div class="menu-messages-ico">
@@ -106,8 +109,9 @@
                                 </li>
                             </ul>
                         </li>
-
+                        -->
                         <!-- 新提示 -->
+                        <!--
                         <li class="am-dropdown" data-am-dropdown>
                             <a href="javascript:;" class="am-dropdown-toggle" data-am-dropdown-toggle>
                                 <i class="am-icon-bell"></i>
@@ -115,7 +119,7 @@
                             </a>
 
                             <!-- 弹出列表 -->
-                            <ul class="am-dropdown-content tpl-dropdown-content">
+                            <!-- <ul class="am-dropdown-content tpl-dropdown-content">
                                 <li class="tpl-dropdown-menu-notifications">
                                     <a href="javascript:;" class="tpl-dropdown-menu-notifications-item am-cf">
                                         <div class="tpl-dropdown-menu-notifications-title">
@@ -157,18 +161,16 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
-
+                        </li> -->
                         <!-- 退出 -->
                         <li class="am-text-sm">
-                            <a href="javascript:;">
+                            <a href="{{ url_for('admin.logout') }}">
                                 <span class="am-icon-sign-out"></span> 退出
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
-
         </header>
 {% endblock %}
 
@@ -194,11 +196,11 @@
             <div class="tpl-sidebar-user-panel">
                 <div class="tpl-user-panel-slide-toggleable">
                     <div class="tpl-user-panel-profile-picture">
-                        <img src="../static/assets/img/user04.png" alt="">
+                        <img src="../static/assets/img/MMarket.png" alt="">
                     </div>
                     <span class="user-panel-logged-in-text">
               <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
-              禁言小张
+              超级帅哥
           </span>
                     <a href="javascript:;" class="tpl-user-panel-action-link"> <span class="am-icon-pencil"></span> 账号设置</a>
                 </div>
@@ -206,31 +208,32 @@
 
             <!-- 菜单 -->
             <ul class="sidebar-nav">
-                <li class="sidebar-nav-heading">Components <span class="sidebar-nav-heading-info"> 附加组件</span></li>
+               <!-- <li class="sidebar-nav-heading">Components <span class="sidebar-nav-heading-info"> 附加组件</span></li> -->
                 <li class="sidebar-nav-link">
                     <a href="index.html" class="active">
-                        <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
+                        <i class="am-icon-home sidebar-nav-link-logo"></i> 管理
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
-                    <a href="tables.html">
-                        <i class="am-icon-table sidebar-nav-link-logo"></i> 表格
+                    <a href="{{ url_for('admin.edit') }}">
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 编辑
                     </a>
                 </li>
+               <!--
                 <li class="sidebar-nav-link">
                     <a href="calendar.html">
-                        <i class="am-icon-calendar sidebar-nav-link-logo"></i> 日历
+                        <i class="am-icon-calendar sidebar-nav-link-logo"></i> python
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
                     <a href="form.html">
-                        <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 表单
+                        <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 随笔
 
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
                     <a href="chart.html">
-                        <i class="am-icon-bar-chart sidebar-nav-link-logo"></i> 图表
+                        <i class="am-icon-bar-chart sidebar-nav-link-logo"></i> 小说
 
                     </a>
                 </li>
@@ -270,7 +273,7 @@
                     <a href="404.html">
                         <i class="am-icon-tv sidebar-nav-link-logo"></i> 404错误
                     </a>
-                </li>
+                </li> -->
 
             </ul>
         </div>
@@ -285,9 +288,9 @@
 {% endblock %}
 {% block scripts %}
     <script src="../static/assets/js/jquery.min.js"></script>
-<script src="../static/assets/js/amazeui.min.js"></script>
-<script src="../static/assets/js/app.js"></script>
-<script src="../static/assets/js/amazeui.datatables.min.js"></script>
-<script src="../static/assets/js/dataTables.responsive.min.js"></script>
+    <script src="../static/assets/js/amazeui.min.js"></script>
+    <script src="../static/assets/js/app.js"></script>
+    <script src="../static/assets/js/amazeui.datatables.min.js"></script>
+    <script src="../static/assets/js/dataTables.responsive.min.js"></script>
 {% endblock %}
 </html>

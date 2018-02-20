@@ -28,41 +28,36 @@
  *   ━━━━━━感觉萌萌哒━━━━━━
  '''
 
-from flask import render_template
+from flask import render_template, request, redirect, url_for
 from . import admin
-from .form import RegisterForm, EditForm
+from .form import RegisterForm, EditForm, LoginForm
 from myBlog import db
 from app.models import User, Post
+from flask_login import login_required, login_user, logout_user
+import re
 
 
 @admin.route('/login', methods=["GET", "POST"])
 def login():
-    # if request.form:
-    #     account = request.form['account']
-    #     password = request.form['password']
-    #     if account == '9':
-    #         return render_template('admin/index.html')
-    return render_template('admin/login.html')
+    form = LoginForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        remember = form.remember_me.data
+        user = User.query.filter_by(username=username).first()
+        if user is not None and user.verify_password(password):
+            login_user(user, remember)
+            if request.args.get('next') and re.match('/admin', request.args.get('next')) is not None:
+                return redirect(request.args.get('next'))
+            else:
+                return redirect(url_for('admin.index'))
+    return render_template('admin/login.html', form=form)
 
 
 @admin.route('/', methods=['GET', 'POST'])
+@login_required
 def index():
     return render_template('admin/index.html')
-
-
-@admin.route('/front-end', methods=['GET', 'POST'])
-def front_end():
-    return render_template('admin/front-end.html')
-
-
-@admin.route('/python', methods=['GET', 'POST'])
-def python():
-    return render_template('admin/python.html')
-
-
-@admin.route('/fiction', methods=['GET', 'POST'])
-def fiction():
-    return render_template('admin/fiction.html')
 
 
 @admin.route('/sign-up', methods=['GET', 'POST'])
@@ -75,10 +70,12 @@ def register():
         user = User(username=username, password=password, email=email)
         db.session.add(user)
         db.session.commit()
+        return redirect('admin.login')
     return render_template('admin/sign-up.html', form=form)
 
 
 @admin.route('/edit', methods=['GET', 'POST'])
+@login_required
 def edit():
     form = EditForm()
     tags = ['pythonTag', 'CssTag', 'JsTag', 'MachineTag']
@@ -95,3 +92,9 @@ def edit():
         db.session.add(post)
         db.session.commit()
     return render_template('admin/edit.html', form=form)
+
+
+@admin.route('/logout', methods=['GET', 'POST'])
+def logout():
+    logout_user()
+    return redirect(url_for('main.index'))

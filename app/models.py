@@ -13,20 +13,36 @@ from datetime import datetime
 from markdown import markdown
 import bleach
 from werkzeug.security import generate_password_hash, check_password_hash
-from myBlog import db
+from . import db, login_manager
+from flask_login import UserMixin
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(255), unique=True, nullable=False)
     email = db.Column(db.String(255), nullable=True)
     password_hash = db.Column(db.String(128), nullable=False)
 
-    def __init__(self, username, password_hash, email):
+    def __init__(self, username, password, email):
         self.username = username
-        self.password_hash = password_hash
+        self.password = password
         self.email = email
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
+
+    @property
+    def password(self):
+        raise AttributeError('password is not a readable attribute/ password 不是一个可读属性。')
+
+    @password.setter
+    def password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def verify_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
 
 class Post(db.Model):

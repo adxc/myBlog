@@ -12,10 +12,14 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_pagedown import PageDown
+from flask_login import LoginManager
 from config import Config
 
 db = SQLAlchemy()
 page_down = PageDown()
+login_manager = LoginManager()
+login_manager.session_protection = 'strong'
+login_manager.login_view = 'admin.login'
 
 
 def create_app():
@@ -23,6 +27,7 @@ def create_app():
     app.config.from_object(Config)
     db.init_app(app)
     page_down.init_app(app)
+    login_manager.init_app(app)
 
     # 注册蓝本
     from .admin import admin as admin_blueprint
@@ -32,5 +37,6 @@ def create_app():
     app.register_blueprint(main_blueprint)
 
     return app
+
 
 from app.main import view

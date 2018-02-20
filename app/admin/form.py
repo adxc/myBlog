@@ -43,6 +43,15 @@ class RegisterForm(FlaskForm):
     submit = SubmitField('注册')
 
 
+class LoginForm(FlaskForm):
+    username = StringField('用户名', validators=[DataRequired(), Length(1, 64), Regexp('^(?!_)(?!.*?_$)[a-zA-Z0-9_'
+                                                                                    '\u4e00-\u9fa5]+$', 0,
+                                                                                    message='非法用户名')])
+    password = PasswordField('密码', validators=[DataRequired()])
+    remember_me = BooleanField('记住我')
+    submit = SubmitField('登录')
+
+
 class EditForm(FlaskForm):
     article = PageDownField("Your post", validators=[DataRequired()])
     title = StringField('标题', validators=[DataRequired()])
